@@ -7,7 +7,7 @@ defmodule Commits.Logs.CommitMessage do
   schema "commit_messages" do
     field :committed_at, :naive_datetime
     field :content, :string
-
+    field :repo_name, :string
     timestamps()
   end
 
