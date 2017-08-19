@@ -5,7 +5,7 @@ defmodule Commits.Logs.CommitMessage do
 
 
   schema "commit_messages" do
-    field :commited_at, :naive_datetime
+    field :committed_at, :naive_datetime
     field :content, :string
 
     timestamps()
@@ -14,7 +14,7 @@ defmodule Commits.Logs.CommitMessage do
   @doc false
   def changeset(%CommitMessage{} = commit_message, attrs) do
     commit_message
-    |> cast(attrs, [:content, :commited_at])
-    |> validate_required([:content, :commited_at])
+    |> cast(attrs, [:content, :committed_at])
+    |> validate_required([:content, :committed_at])
   end
 end
