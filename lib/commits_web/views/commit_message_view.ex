@@ -13,6 +13,6 @@ defmodule CommitsWeb.CommitMessageView do
   def render("commit_message.json", %{commit_message: commit_message}) do
     %{id: commit_message.id,
       content: commit_message.content,
-      commited_at: commit_message.commited_at}
+      committed_at: commit_message.committed_at}
   end
 end

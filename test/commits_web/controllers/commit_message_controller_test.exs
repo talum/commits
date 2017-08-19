@@ -4,9 +4,9 @@ defmodule CommitsWeb.CommitMessageControllerTest do
   alias Commits.Logs
   alias Commits.Logs.CommitMessage
 
-  @create_attrs %{commited_at: ~N[2010-04-17 14:00:00.000000], content: "some content"}
-  @update_attrs %{commited_at: ~N[2011-05-18 15:01:01.000000], content: "some updated content"}
-  @invalid_attrs %{commited_at: nil, content: nil}
+  @create_attrs %{committed_at: ~N[2010-04-17 14:00:00.000000], content: "some content"}
+  @update_attrs %{committed_at: ~N[2011-05-18 15:01:01.000000], content: "some updated content"}
+  @invalid_attrs %{committed_at: nil, content: nil}
 
   def fixture(:commit_message) do
     {:ok, commit_message} = Logs.create_commit_message(@create_attrs)
@@ -32,7 +32,7 @@ defmodule CommitsWeb.CommitMessageControllerTest do
       conn = get conn, commit_message_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
-        "commited_at" => ~N[2010-04-17 14:00:00.000000],
+        "committed_at" => ~N[2010-04-17 14:00:00.000000],
         "content" => "some content"}
     end
 
@@ -52,7 +52,7 @@ defmodule CommitsWeb.CommitMessageControllerTest do
       conn = get conn, commit_message_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
-        "commited_at" => ~N[2011-05-18 15:01:01.000000],
+        "committed_at" => ~N[2011-05-18 15:01:01.000000],
         "content" => "some updated content"}
     end
 
