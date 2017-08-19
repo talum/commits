@@ -11,8 +11,6 @@
 # and so on) as t
 
 
-HTTPoison.post("https://api.github.com/graphql", "{\"query\": \"query { viewer { login }}\"}", [{"Authorization", "bearer #{System.get_env("GITHUB_ACCESS_TOKEN")}"}])
-
 query = "query {
   repository(name: \"ironboard\", owner:\"flatiron-labs\") {
     name
@@ -42,4 +40,19 @@ query = "query {
   }
 }"
 
-HTTPoison.post("https://api.github.com/graphql", Poison.encode!(%{"query" => query}), [{"Authorization", "bearer #{System.get_env("GITHUB_ACCESS_TOKEN")}"}, {"Content-Type", "application/json"}])
+{:ok, %HTTPoison.Response{status_code: 200, body: body}} = HTTPoison.post("https://api.github.com/graphql", Poison.encode!(%{"query" => query}), [{"Authorization", "bearer #{System.get_env("GITHUB_ACCESS_TOKEN")}"}, {"Content-Type", "application/json"}])
+
+history = body |> Poison.decode! |> Kernel.get_in(["data", "repository", "ref", "target", "history"])
+hasNextPage = history["pageInfo"]["hasNextPage"]
+
+commits = body |> Poison.decode! |> Kernel.get_in(["data", "repository", "ref", "target", "history", "edges"])
+
+last_cursor = List.last(commits)["cursor"]
+
+unless the edge message contains "merge"
+
+# Make the request
+# iterate over the edges and persist them unless the message contains "merge"
+# save the last cursor
+# if has next page is true, go again
+# otherwise, stop
