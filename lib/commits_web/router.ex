@@ -19,8 +19,10 @@ defmodule CommitsWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CommitsWeb do
-  #   pipe_through :api
-  # end
+  #Other scopes may use custom stacks.
+  scope "/api", CommitsWeb do
+    pipe_through :api
+
+    resources "/commit_messages", CommitMessageController, except: [:new, :edit]
+  end
 end
