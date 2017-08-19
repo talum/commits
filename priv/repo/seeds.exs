@@ -10,49 +10,75 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as t
 
+require IEx
 
-query = "query {
-  repository(name: \"ironboard\", owner:\"flatiron-labs\") {
-    name
-    ref(qualifiedName: \"master\") {
-      target {
-        ... on Commit {
-          id
-          history(first: 100, author: {id: \"MDQ6VXNlcjEyNDA1MDQ=\"}, after: \"5262ce37ca79e49f28041cb7a0fdd766192933d8 0\") {
-            pageInfo {
-              hasNextPage
-            }
-            edges {
-              node {
-                oid
-                message
-                author() {
-                  name
-                  date
+defmodule Seed do
+
+  def query(cursor) do
+    "query {
+      repository(name: \"ironboard\", owner:\"flatiron-labs\") {
+        name
+        ref(qualifiedName: \"master\") {
+          target {
+            ... on Commit {
+              id
+              history(first: 100, author: {id: \"MDQ6VXNlcjEyNDA1MDQ=\"}, after: \"#{cursor}\") {
+                pageInfo {
+                  hasNextPage
+                }
+                edges {
+                  node {
+                    oid
+                    message
+                    author() {
+                      name
+                      date
+                    }
+                  }
+                  cursor
                 }
               }
-              cursor
             }
           }
         }
       }
-    }
-  }
-}"
+    }"
+  end
 
-{:ok, %HTTPoison.Response{status_code: 200, body: body}} = HTTPoison.post("https://api.github.com/graphql", Poison.encode!(%{"query" => query}), [{"Authorization", "bearer #{System.get_env("GITHUB_ACCESS_TOKEN")}"}, {"Content-Type", "application/json"}])
+  def get_commits(cursor, hasNextPage) when hasNextPage == true do
+    token = Application.get_env(:commits, :github_access_token)
 
-history = body |> Poison.decode! |> Kernel.get_in(["data", "repository", "ref", "target", "history"])
-hasNextPage = history["pageInfo"]["hasNextPage"]
+    {:ok, %HTTPoison.Response{status_code: 200, body: body}} = HTTPoison.post("https://api.github.com/graphql", Poison.encode!(%{"query" => query(cursor)}), [{"Authorization", "bearer #{token}"}, {"Content-Type", "application/json"}])
 
-commits = body |> Poison.decode! |> Kernel.get_in(["data", "repository", "ref", "target", "history", "edges"])
+    history = body
+      |> Poison.decode!
+      |> Kernel.get_in(["data", "repository", "ref", "target", "history"])
 
-last_cursor = List.last(commits)["cursor"]
+    nextPage = history["pageInfo"]["hasNextPage"]
 
-unless the edge message contains "merge"
+    commits = body
+      |> Poison.decode!
+      |> Kernel.get_in(["data", "repository", "ref", "target", "history", "edges"])
 
-# Make the request
-# iterate over the edges and persist them unless the message contains "merge"
-# save the last cursor
-# if has next page is true, go again
-# otherwise, stop
+    Enum.map(commits, fn c -> save(c) end)
+
+    last_cursor = List.last(commits)["cursor"]
+    get_commits(last_cursor, nextPage)
+  end
+
+  def get_commits(cursor, hasNextPage) when hasNextPage == false do
+    IO.puts cursor
+  end
+
+  def save(commit) do
+    message = commit["node"]["message"]
+    date    = commit["node"]["author"]["date"]
+
+    if !String.contains?(message, "Merge") do
+      IO.puts message
+      # Repo.insert! etc etc
+    end
+  end
+end
+
+Seed.get_commits("5262ce37ca79e49f28041cb7a0fdd766192933d8 0", true)
