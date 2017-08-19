@@ -76,7 +76,8 @@ defmodule Seed do
 
     if !String.contains?(message, "Merge") do
       IO.puts message
-      # Repo.insert! etc etc
+      {:ok, formatted_date} = NaiveDateTime.from_iso8601(date)
+      Commits.Repo.insert!(%Commits.Logs.CommitMessage{content: message, committed_at: formatted_date})
     end
   end
 end
