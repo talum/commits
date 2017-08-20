@@ -32,7 +32,17 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.loading){ return (<div>Loading</div>) }
+    if (this.state.loading){
+      return (
+        <div className="spinner">
+          <div className="rect1"></div>
+          <div className="rect2"></div>
+          <div className="rect3"></div>
+          <div className="rect4"></div>
+          <div className="rect5"></div>
+        </div>
+      )
+    }
 
     return(
       <div className='level level--padding-tall' onClick={this.changeIndex}>
