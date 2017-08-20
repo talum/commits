@@ -13,7 +13,7 @@ defmodule CommitsWeb.CommitMessageView do
   def render("help.json", %{commit_message: commit_message}) do
     %{
       text: commit_message.content,
-      in_channel: true
+      response_type: "in_channel"
     }
   end
 
