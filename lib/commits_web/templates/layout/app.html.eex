@@ -8,11 +8,15 @@
     <meta name="author" content="">
 
     <title>Commits by Logan</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto:900" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <main role="main">
+    <main class="body" role="main">
+    <div class="level level--padding-short">
+      <h1 class="heading heading--level-2 util--text-align-c">Commits by Logan</h1>
+    </div>
       <%= render @view_module, @view_template, assigns %>
     </main>
 

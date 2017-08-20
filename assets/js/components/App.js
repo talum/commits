@@ -35,9 +35,8 @@ class App extends React.Component {
     if (this.state.loading){ return (<div>Loading</div>) }
 
     return(
-      <div>
-        <h1>{ this.state.messages[this.state.currentMessageIndex].content }</h1>
-        <button onClick={this.changeIndex}>Regenerate</button>
+      <div className='level level--padding-tall' onClick={this.changeIndex}>
+        <h2 className='heading heading--level-1 util--text-align-c hoverable'>{ this.state.messages[this.state.currentMessageIndex].content }</h2>
       </div>
     )
 

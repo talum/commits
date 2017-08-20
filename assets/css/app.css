@@ -1,1 +1,58 @@
 /* This file is for your main application css. */
+
+* {
+  padding: 0;
+  margin:  0;
+  box-sizing: border-box;
+}
+
+body {
+ font-family: 'Roboto', sans-serif;
+ background-color: #062F4F;
+}
+
+.body {
+  width: 66%;
+  margin: 0 auto;
+}
+
+.heading  {
+ font-family: 'Roboto Condensed', sans-serif;
+ word-wrap: break-word;
+}
+
+.heading--level-1 {
+ font-weight: 900;
+ font-size:   64px;
+ color: #4ABDAC;
+}
+
+.heading--level-2 {
+  font-size: 36px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #DFDCE3;
+}
+
+.level {
+}
+
+.level--padding-short {
+  padding: 24px 0;
+}
+
+.level--padding-tall {
+  padding: 64px 0;
+}
+
+.util--text-align-c {
+  text-align: center;
+}
+
+.hoverable {
+}
+
+.hoverable:hover {
+  color: #078893;
+  cursor: pointer;
+}
