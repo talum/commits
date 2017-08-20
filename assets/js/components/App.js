@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { mouseTrap } from 'react-mousetrap'
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +11,10 @@ class App extends React.Component {
       currentMessageIndex: null
     }
     this.changeIndex = this.changeIndex.bind(this)
+  }
+
+  componentWillMount() {
+    this.props.bindShortcut('space', this.changeIndex)
   }
 
   componentDidMount() {
@@ -49,8 +54,7 @@ class App extends React.Component {
         <h2 className='heading heading--level-1 util--text-align-c hoverable'>{ this.state.messages[this.state.currentMessageIndex].content }</h2>
       </div>
     )
-
   }
 }
 
-export default App
+export default mouseTrap(App)
