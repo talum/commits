@@ -109,3 +109,12 @@ body {
     -webkit-transform: scaleY(1.0);
   }
 }
+
+@media (max-width: 641px) {
+  .heading--level-1 {
+    font-size: 36px;
+  }
+  .heading--level-2 {
+    font-size: 24px;
+  }
+}
