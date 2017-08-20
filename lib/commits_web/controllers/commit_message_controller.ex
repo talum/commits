@@ -20,6 +20,11 @@ defmodule CommitsWeb.CommitMessageController do
     end
   end
 
+  def help(conn, _params) do
+    commit_message = Logs.get_random_message()
+    render(conn, "help.json", commit_message: commit_message)
+  end
+
   def show(conn, %{"id" => id}) do
     commit_message = Logs.get_commit_message!(id)
     render(conn, "show.json", commit_message: commit_message)

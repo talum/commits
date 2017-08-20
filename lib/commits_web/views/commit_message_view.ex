@@ -10,10 +10,18 @@ defmodule CommitsWeb.CommitMessageView do
     %{data: render_one(commit_message, CommitMessageView, "commit_message.json")}
   end
 
+  def render("help.json", %{commit_message: commit_message}) do
+    %{
+      text: commit_message.content,
+      in_channel: true
+    }
+  end
+
   def render("commit_message.json", %{commit_message: commit_message}) do
     %{id: commit_message.id,
       content: commit_message.content,
       committed_at: commit_message.committed_at,
       repo_name: commit_message.repo_name}
   end
+
 end

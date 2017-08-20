@@ -8,6 +8,14 @@ defmodule Commits.Logs do
 
   alias Commits.Logs.CommitMessage
 
+  def get_random_message do
+    count = Repo.all(CommitMessage)
+            |> Enum.count
+    random_id = :rand.uniform(count)
+
+    Repo.get!(CommitMessage, random_id)
+  end
+
   @doc """
   Returns the list of commit_messages.
 
