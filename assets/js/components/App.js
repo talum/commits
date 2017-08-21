@@ -103,6 +103,11 @@ const Main = (props) => {
         </div>
       </div>
       {props.children}
+    <div className='footer'>
+      <div className='level level--padding-short'>
+        <h3 className='heading heading--level-3 util--text-align-c'>Press the spacebar or tap the text to get a new message</h3>
+      </div>
+    </div>
     </main>
   )
 }
