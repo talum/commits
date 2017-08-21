@@ -13,12 +13,8 @@
   </head>
 
   <body>
-    <main class="body" role="main">
-    <div class="level level--padding-short">
-      <h1 class="heading heading--level-2 util--text-align-c">Commits by Logan</h1>
-    </div>
-      <%= render @view_module, @view_template, assigns %>
-    </main>
+    <div id="app"/>
+    <%= render @view_module, @view_template, assigns %>
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>

@@ -8,11 +8,11 @@
 
 body {
  font-family: 'Roboto', sans-serif;
- background-color: #062F4F;
 }
 
 .body {
-  width: 66%;
+  width: 100%;
+  height: 100vh;
   margin: 0 auto;
 }
 
@@ -24,7 +24,6 @@ body {
 .heading--level-1 {
  font-weight: 900;
  font-size:   64px;
- color: #4ABDAC;
 }
 
 .heading--level-2 {
@@ -35,6 +34,10 @@ body {
 }
 
 .level {
+}
+
+.level__inner {
+  padding: 24px;
 }
 
 .level--padding-short {
