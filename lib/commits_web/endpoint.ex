@@ -37,7 +37,7 @@ defmodule CommitsWeb.Endpoint do
     store: :cookie,
     key: "_commits_key",
     signing_salt: "ZZVxNN0W"
-
+  plug Corsica, origins: "*"
   plug CommitsWeb.Router
 
   @doc """

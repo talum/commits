@@ -21,7 +21,7 @@ defmodule Commits.Mixfile do
     [
       mod: {Commits.Application, []},
       extra_applications: [:logger, :runtime_tools,
-      :httpoison, :poison]
+      :httpoison, :poison, :corsica]
     ]
   end
 
@@ -43,7 +43,8 @@ defmodule Commits.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:httpoison, "~> 0.13.0"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:corsica, "~> 0.4"}
     ]
   end
 
