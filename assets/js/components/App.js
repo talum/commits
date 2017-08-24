@@ -83,11 +83,19 @@ class App extends React.Component {
 
     return(
       <Main {...this.props} backgroundColor={backgroundColor}>
-        <div className='level level--padding-tall' onClick={this.changeIndex}>
+      <div className='flex flex--column'>
+        <div className='level level--padding-short'/>
+        <div className='level level--padding-short' onClick={this.changeIndex}>
           <div className='level__inner'>
-            <h2 className='heading heading--level-1 util--text-align-c hoverable' style={{color: headingColor}}>{ this.state.messages[this.state.currentMessageIndex].content }</h2>
+            <div className='flex flex--row'>
+              <div className='flex__spacer'/>
+              <h2 className='heading heading--level-1 util--text-align-c hoverable' style={{color: headingColor}}>{ this.state.messages[this.state.currentMessageIndex].content }</h2>
+              <div className='flex__spacer'/>
+            </div>
           </div>
         </div>
+        <div className='level level--padding-short'/>
+      </div>
       </Main>
     )
   }

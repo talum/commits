@@ -16,9 +16,29 @@ body {
   margin: 0 auto;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--row {
+  flex-direction: row;
+}
+
+.flex__spacer {
+  width: 20%;
+}
+
 .heading  {
  font-family: 'Roboto Condensed', sans-serif;
  word-wrap: break-word;
+ overflow-wrap: break-word;
+ hyphens: auto;
 }
 
 .heading--level-1 {
@@ -128,7 +148,16 @@ body {
   .heading--level-1 {
     font-size: 36px;
   }
-  .heading--level-2 {
+  .heading--level-2, .heading--level-3 {
     font-size: 24px;
+  }
+}
+
+@media (max-width: 401px) {
+  .heading--level-1 {
+    font-size: 24px;
+  }
+  .heading--level-2, .heading--level-3 {
+    font-size: 16px;
   }
 }
