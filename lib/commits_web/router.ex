@@ -23,7 +23,7 @@ defmodule CommitsWeb.Router do
   scope "/api", CommitsWeb do
     pipe_through :api
 
-    resources "/commit_messages", CommitMessageController, except: [:new, :edit]
+    resources "/commit_messages", CommitMessageController, except: [:new, :edit, :update, :delete]
     post "/help", CommitMessageController, :help
   end
 end
