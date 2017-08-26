@@ -1,5 +1,10 @@
 # Commits
 
+## Intro
+An app that serves up the hilarious GitHub commit messages from an old colleague. It leverages the GitHub GraphQL API to pull all commit messages that aren't merges. This is a Phoenix app with a React front-end.
+
+## Developing
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
